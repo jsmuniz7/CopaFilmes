@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
-import { MovieResultComponent } from './movie-result.component';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from 'src/app/core/core.module';
+import { MovieResultComponent } from './movie-result.component';
 
 @NgModule({
-    declarations: [ MovieResultComponent],
-    imports: [
-        CommonModule,
-        CoreModule
-    ]
+    declarations: [MovieResultComponent],
+    imports: [CommonModule],
+    exports: [MovieResultComponent]
 })
 export class MovieResultModule{
 

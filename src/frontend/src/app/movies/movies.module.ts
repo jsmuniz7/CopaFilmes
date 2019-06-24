@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
+
 import { MovieModule } from './movie/movie.module';
 import { MovieListModule } from './movie-list/movie-list.module';
-import { MovieResultModule } from './movie-result/movie-result.module';
+import { MovieResultListModule } from './movie-result-list/movie-result-list.module';
 
 @NgModule({
     imports:[
         MovieModule,
         MovieListModule,
-        MovieResultModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MovieResultListModule
     ]
 })
 export class MoviesModule {

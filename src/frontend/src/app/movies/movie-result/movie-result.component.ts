@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { Movie } from '../movie/movie';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { MovieResult } from './movie-result';
+
+
 
 @Component({
     selector: 'cf-movie-result',
@@ -6,4 +12,5 @@ import { Component } from '@angular/core';
 })
 export class MovieResultComponent{
 
+    
 }

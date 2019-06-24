@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { Movie } from '../movie/movie';
-import { ActivatedRoute } from '@angular/router';
 
 const TOTAL_MOVIES = 8;
 
@@ -16,7 +17,9 @@ export class MovieListComponent implements OnInit{
     totalMoviesToSelect: number = TOTAL_MOVIES;
     selectionCompleted: boolean = false;
 
-    constructor(private activatedRoute : ActivatedRoute) {}
+    constructor(
+        private activatedRoute : ActivatedRoute,
+        private router: Router) {}
 
     ngOnInit(): void {
         this.movies = this.activatedRoute.snapshot.data.movies;
@@ -37,7 +40,8 @@ export class MovieListComponent implements OnInit{
     }
 
     generateChampionship(){
-        console.log(`Movies to process ${JSON.stringify(this.selectedMovies)}`);
+        window.localStorage.setItem('selectedMovies', JSON.stringify(this.selectedMovies));
+        this.router.navigate(['result']);
     }
 
 }

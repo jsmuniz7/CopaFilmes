@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieListResolver } from './movies/movie-list/movie-list.resolver';
-import { MovieResultComponent } from './movies/movie-result/movie-result.component';
+import { MovieResultListComponent } from './movies/movie-result-list/movie-result-list.component';
 
 const routes : Routes = [
     { 
@@ -15,7 +15,7 @@ const routes : Routes = [
     },
     { 
         path: 'result', 
-        component: MovieResultComponent,
+        component: MovieResultListComponent,
     }
 ]
 
