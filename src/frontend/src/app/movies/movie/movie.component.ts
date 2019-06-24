@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Movie } from './movie';
+import { FormControl, CheckboxControlValueAccessor, FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'cf-movie',
@@ -11,7 +12,15 @@ export class MovieComponent{
     @Input() movie : Movie;
     @Input() disabled: boolean;
 
-    selected(){
-        this.onMovieSelected.emit(this.movie);
+
+    selected(element : HTMLInputElement){
+        if(this.disabled){
+            if(!element.checked){
+                this.onMovieSelected.emit(this.movie);
+            }
+            element.checked = false;
+        }else {
+            this.onMovieSelected.emit(this.movie);
+        }
     }
 }

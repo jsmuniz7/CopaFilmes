@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
 import { MovieModule } from './movie/movie.module';
 import { MovieListModule } from './movie-list/movie-list.module';
 import { MovieResultModule } from './movie-result/movie-result.module';
@@ -7,7 +8,8 @@ import { MovieResultModule } from './movie-result/movie-result.module';
     imports:[
         MovieModule,
         MovieListModule,
-        MovieResultModule
+        MovieResultModule,
+        ReactiveFormsModule
     ]
 })
 export class MoviesModule {
