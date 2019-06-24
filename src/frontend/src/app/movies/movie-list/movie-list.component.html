@@ -9,6 +9,20 @@
         </cf-header>
     </div>
     <div class="row col-12">
+        <div class="col-lg-6 col-sm-12">
+            <cf-movies-selected
+                totalMovies = '8'
+                [selectedMovies]='selectedMovies.length'>
+            </cf-movies-selected>
+        </div>
+        <div class="col-lg-6 " style="float: right;">
+            <cf-confirm-button
+                buttonText='GERAR MEU CAMPEONATO'
+                (click)='generateChampionship(selectedMovies)'>
+            </cf-confirm-button>
+        </div>
+    </div>
+    <div class="row col-12">
         <cf-movies
             (onMovieSelected)="handleSelectedMovies($event)" 
             [movies]='movies'></cf-movies>

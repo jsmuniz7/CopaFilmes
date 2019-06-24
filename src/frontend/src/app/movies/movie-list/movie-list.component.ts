@@ -23,7 +23,10 @@ export class MovieListComponent implements OnInit{
             this.selectedMovies.push(movie);
         else
             this.selectedMovies.splice(index, 1);
-        console.log(this.selectedMovies);
+    }
+
+    generateChampionship(){
+        console.log(`Movies to process ${JSON.stringify(this.selectedMovies)}`);
     }
 
 }
