@@ -9,6 +9,7 @@ export class MoviesComponent implements OnChanges{
     
     @Output() onMovieSelected = new EventEmitter<Movie>();
     @Input() movies: Movie[] = [];
+    @Input() disabled: boolean;
     rows: any[] = [];
     
     ngOnChanges(changes: SimpleChanges): void {

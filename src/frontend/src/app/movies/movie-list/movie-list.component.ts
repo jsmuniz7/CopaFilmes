@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../movie/movie';
 import { ActivatedRoute } from '@angular/router';
 
+const TOTAL_MOVIES = 8;
+
 @Component({
     selector: 'cf-movie-list',
     templateUrl: './movie-list.component.html'
@@ -11,6 +13,9 @@ export class MovieListComponent implements OnInit{
     movies: Movie[] = [];
     selectedMovies: Movie[] = [];
 
+    totalMoviesToSelect: number = TOTAL_MOVIES;
+    selectionCompleted: boolean = false;
+
     constructor(private activatedRoute : ActivatedRoute) {}
 
     ngOnInit(): void {
@@ -19,10 +24,16 @@ export class MovieListComponent implements OnInit{
 
     handleSelectedMovies(movie: Movie){
         let index = this.selectedMovies.indexOf(movie);
-        if(index == -1)
+        if(index == -1){
             this.selectedMovies.push(movie);
-        else
+            if(this.selectedMovies.length == this.totalMoviesToSelect)
+                this.selectionCompleted = true;
+        }
+        else{
             this.selectedMovies.splice(index, 1);
+            if(this.selectionCompleted)
+                this.selectionCompleted = false;
+        }
     }
 
     generateChampionship(){

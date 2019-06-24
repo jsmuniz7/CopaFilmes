@@ -11,20 +11,22 @@
     <div class="row col-12">
         <div class="col-lg-6 col-sm-12">
             <cf-movies-selected
-                totalMovies = '8'
+                [totalMovies] = 'totalMoviesToSelect'
                 [selectedMovies]='selectedMovies.length'>
             </cf-movies-selected>
         </div>
         <div class="col-lg-6 " style="float: right;">
             <cf-confirm-button
+                [disabled]='!selectionCompleted'
                 buttonText='GERAR MEU CAMPEONATO'
-                (click)='generateChampionship(selectedMovies)'>
+                (click)='generateChampionship()'>
             </cf-confirm-button>
         </div>
     </div>
     <div class="row col-12">
         <cf-movies
             (onMovieSelected)="handleSelectedMovies($event)" 
-            [movies]='movies'></cf-movies>
+            [movies]='movies'
+            [disabled]='selectionCompleted'></cf-movies>
     </div>
 </div>

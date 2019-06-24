@@ -9,5 +9,6 @@ import { Movie } from 'src/app/movies/movie/movie';
 export class ConfirmButtonComponent {
 
     @Input() buttonText: string;
+    @Input() disabled : boolean;
 
 }

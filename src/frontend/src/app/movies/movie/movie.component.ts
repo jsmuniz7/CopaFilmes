@@ -9,11 +9,9 @@ export class MovieComponent{
     
     @Output() onMovieSelected = new EventEmitter<Movie>();
     @Input() movie : Movie;
-    isSelected: boolean = false
+    @Input() disabled: boolean;
 
     selected(){
-        this.isSelected = !this.isSelected;
-        console.log(`Movie Selected: ${this.isSelected} ${this.movie.titulo} ${this.movie.nota}`)
         this.onMovieSelected.emit(this.movie);
     }
 }
