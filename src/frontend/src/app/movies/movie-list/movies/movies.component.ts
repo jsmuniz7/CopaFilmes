@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Movie } from '../../movie/movie';
 
 @Component({
@@ -7,6 +7,7 @@ import { Movie } from '../../movie/movie';
 })
 export class MoviesComponent implements OnChanges{
     
+    @Output() onMovieSelected = new EventEmitter<Movie>();
     @Input() movies: Movie[] = [];
     rows: any[] = [];
     
@@ -22,6 +23,10 @@ export class MoviesComponent implements OnChanges{
             newRows.push(movies.slice(i, i+4));
         }
         return newRows;
+    }
+
+    movieSelected(movieSelected: Movie){
+        this.onMovieSelected.emit(movieSelected);
     }
 
 }

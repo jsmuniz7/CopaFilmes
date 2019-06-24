@@ -9,6 +9,8 @@
         </cf-header>
     </div>
     <div class="row col-12">
-        <cf-movies [movies]='movies'></cf-movies>
+        <cf-movies
+            (onMovieSelected)="handleSelectedMovies($event)" 
+            [movies]='movies'></cf-movies>
     </div>
 </div>
