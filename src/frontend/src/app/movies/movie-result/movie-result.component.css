@@ -5,9 +5,13 @@
 .card-position{
     padding: 10px;
     font-size: 32px;
+    color: white;
 }
 
 .card-title{
-    margin-left: 50px;
     font-size: 20px;
+}
+
+.card-header{
+    background-color: #6E6E6E;
 }
