@@ -15,7 +15,7 @@ const routes : Routes = [
     },
     { 
         path: 'result', 
-        component: MovieResultListComponent,
+        component: MovieResultListComponent
     }
 ]
 

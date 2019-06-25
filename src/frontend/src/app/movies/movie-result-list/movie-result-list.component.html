@@ -7,4 +7,25 @@
             pageMessage='Veja o resultado final do Campeonato de filmes de forma simples e rápida'>
         </cf-header>
     </div>
+
+    <div class="row col-12">
+        <div class="col-12 " style="float: right;">
+            <cf-confirm-button
+                buttonText='NOVO CAMPEONATO'
+                (click)='newChampionship()'>
+            </cf-confirm-button>
+        </div>
+    </div>
+
+    <div *ngFor="let movie of results" class="row col-lg-12 pt-2">
+        <cf-movie-result
+            [moviePosition] ="movie.position"
+            [movieTitle] ="movie.title">
+        </cf-movie-result> 
+    </div>
 </div>
+
+
+      
+      
+      

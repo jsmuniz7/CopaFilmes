@@ -1,16 +1,13 @@
-import { Component } from '@angular/core';
-import { Movie } from '../movie/movie';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { MovieResult } from './movie-result';
-
-
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'cf-movie-result',
-    templateUrl: './movie-result.component.html'
+    templateUrl: './movie-result.component.html',
+    styleUrls: ['./movie-result.component.css']
 })
 export class MovieResultComponent{
 
+    @Input() moviePosition: string = '';
+    @Input() movieTitle: string = '';
     
 }

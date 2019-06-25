@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MovieResultService } from '../movie-result/movie-result.service';
 import { MovieResult } from '../movie-result/movie-result';
 import { Movie } from '../movie/movie';
+import { r3JitTypeSourceSpan } from '@angular/compiler';
 
 @Component({
     selector: 'cf-movie-result-list',
     templateUrl: './movie-result-list.component.html'
 })
 export class MovieResultListComponent implements OnInit{
+    
     
     results: MovieResult[] = [];
 
@@ -25,7 +27,14 @@ export class MovieResultListComponent implements OnInit{
 
         this.service
             .getMovieResultsBySelecion(selectedMovies)
-            .subscribe(results => this.results = results);
-    }
+            .subscribe(results => {
+                this.results = results
+                console.log(this.results);
+            }); 
+     }
+
+     newChampionship(){
+         this.router.navigate(['']);
+     }
 
 }
