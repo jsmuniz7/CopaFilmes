@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CopaFilmes.Api.Model;
+using CopaFilmes.Application.Application;
 using CopaFilmes.Application.Domain;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CopaFilmes.Api.Features.Championship
@@ -10,24 +13,28 @@ namespace CopaFilmes.Api.Features.Championship
     [ApiController]
     public class ChampionshipController : ControllerBase
     {
+        private IMediator _mediator;
+
+        public ChampionshipController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
         [HttpPost]
         [Route("result")]
-        public ActionResult<List<MovieResult>> Result([FromBody] List<Movie> movies)
+        public async Task<ActionResult<List<MovieResult>>> Result([FromBody] List<Movie> movies)
         {
-            var championshipResult = new List<MovieResult>
+            var response = await _mediator.Send(new CreateChampionship(movies));
+
+            var championshipResult = (ChampionshipResult) response.Result;
+
+            var moviesResult = new List<MovieResult>
             {
-                new MovieResult {Title = movies.First().Titulo, Position = 1},
-                //new MovieResult {Title = movies.Last().Titulo, Position = 2}
+                new MovieResult {Position = 1, Title = championshipResult.FirstPlace.Titulo},
+                new MovieResult {Position = 2, Title = championshipResult.SecondPlace.Titulo}
             };
 
-            return Ok(championshipResult);
+            return Ok(moviesResult);
         }
 
-        [HttpGet]
-        [Route("getvalue")]
-        public ActionResult<int> GetValue()
-        {
-            return Ok(1);
-        }
     }
 }
