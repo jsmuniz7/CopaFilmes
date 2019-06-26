@@ -29,7 +29,6 @@ export class MovieResultListComponent implements OnInit{
             .getMovieResultsBySelecion(selectedMovies)
             .subscribe(results => {
                 this.results = results
-                console.log(this.results);
             }, err => {
                 console.log(err);
                 this.newChampionship();
