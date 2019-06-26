@@ -20,7 +20,7 @@ Para buildar o projeto, rode o comando `ng build`. Os artefatos compilados estar
 ## Backend
 O projeto de backend foi desenvolvido com [.NET Core 2.2](https://dotnet.microsoft.com), logo é necessário o runtime equivalente ou superior instalado na máquina para rodar o projeto.
 
-Para acesso da aplicação, rode o comando `dotnet run` na raiz da pasta da solution e  navegue para `http:\\localhost:5000`. A WebApi disponibiliza a interface do [Swagger](https://swagger.io/tools/swagger-ui/) para consulta e consumo dos endpoints
+Para acesso da aplicação, rode o comando `dotnet run` na raiz da pasta da solution e  navegue para `http://localhost:5000`. A WebApi disponibiliza a interface do [Swagger](https://swagger.io/tools/swagger-ui/) para consulta e consumo dos endpoints
 
 Para rodar os testes automatizados, rode o comando `dotnet test`
 
