@@ -25,6 +25,9 @@ namespace CopaFilmes.Api.Features.Championship
         {
             var response = await _mediator.Send(new CreateChampionship(movies));
 
+            if (response.Errors.Any())
+                return BadRequest(response.Errors);
+
             var championshipResult = (ChampionshipResult) response.Result;
 
             var moviesResult = new List<MovieResult>
