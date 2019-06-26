@@ -30,6 +30,9 @@ export class MovieResultListComponent implements OnInit{
             .subscribe(results => {
                 this.results = results
                 console.log(this.results);
+            }, err => {
+                console.log(err);
+                this.newChampionship();
             }); 
      }
 
