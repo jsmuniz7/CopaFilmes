@@ -1,0 +1,20 @@
+body{
+    background-color:  #A8A8A8 !important;
+}
+
+.header{
+    background-color: #6E6E6E;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.header-content{
+    padding: 50px;
+    color: white;
+    width: 50%;
+    text-align: center;
+}
+
+.app-title{
+    color: #A8A8A8;
+}

@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row col-12 header">
+        <cf-header
+            class="header-content col-lg-12"
+            appTitle='CAMPEONATO DE FILMES'
+            pageTitle='Fase de Seleção'
+            pageMessage='Selecione 8 filmes que você deseja que entrem na competição e depois pressione o botão
+            Gerar Meu Campeonato para prosseguir'>
+        </cf-header>
+    </div>
+    <div class="row col-12">
+        <div class="col-lg-6 col-sm-12">
+            <cf-movies-selected
+                [totalMovies] = 'totalMoviesToSelect'
+                [selectedMovies]='selectedMovies.length'>
+            </cf-movies-selected>
+        </div>
+        <div class="col-lg-6 " style="float: right;">
+            <cf-confirm-button
+                [disabled]='!selectionCompleted'
+                buttonText='GERAR MEU CAMPEONATO'
+                (click)='generateChampionship()'>
+            </cf-confirm-button>
+        </div>
+    </div>
+    <div class="row col-12">
+        <cf-movies
+            (onMovieSelected)="handleSelectedMovies($event)" 
+            [movies]='movies'
+            [disabled]='selectionCompleted'></cf-movies>
+    </div>
+</div>

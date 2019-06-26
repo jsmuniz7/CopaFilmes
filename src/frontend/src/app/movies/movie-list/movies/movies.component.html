@@ -1,0 +1,14 @@
+<ol class="list-unstyled">
+    <li *ngFor="let cols of rows" class="row pt-2">
+        <div *ngFor="let movie of cols" class="col-lg-3  col-md-3 col-xs-12">  
+            <cf-movie
+                (onMovieSelected)="movieSelected($event)"
+                [movie]='movie'
+                [disabled]='disabled'>
+            </cf-movie> 
+        </div>
+    </li>
+</ol>
+      
+      
+      

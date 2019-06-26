@@ -1,0 +1,17 @@
+.result-card {
+    width: 67rem;
+}
+
+.card-position{
+    padding: 10px;
+    font-size: 32px;
+    color: white;
+}
+
+.card-title{
+    font-size: 20px;
+}
+
+.card-header{
+    background-color: #6E6E6E;
+}
