@@ -5,11 +5,8 @@ O projeto simula uma competição entre filmes, a serem selecionados pelo usuár
 ## Tecnologias
 
 O projeto contido nesse repositório possui tanto os códigos para o frontend quanto para o backend.
-A parte de frontend foi desenvolvida em Angular e pode ser acessada através da pasta [src/frontend]()
-A Web Api para o backend foi desenvolvida em .NET Core 2.2 e pode ser acessada através da pasta [src/backend]()
-
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+A parte de frontend foi desenvolvida em Angular e pode ser acessada através da pasta [src/frontend](https://github.com/jsmuniz7/CopaFilmes/tree/develop/src/frontend)
+A Web Api para o backend foi desenvolvida em .NET Core 2.2 e pode ser acessada através da pasta [src/backend](https://github.com/jsmuniz7/CopaFilmes/tree/develop/src/backend/copa-filmes-api)
 
 ## Frontend
 
