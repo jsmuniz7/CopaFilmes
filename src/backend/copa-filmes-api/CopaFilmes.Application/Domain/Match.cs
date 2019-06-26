@@ -1,25 +1,24 @@
-﻿namespace CopaFilmes.Application.Domain
+﻿using CopaFilmes.Application.Domain.Interfaces;
+
+namespace CopaFilmes.Application.Domain
 {
     public class Match
     {
+        private readonly IMatchRules _matchRules;
+
         public Movie HomeTeam { get; set; }
         public Movie AwayTeam { get; set; }
-
         public Movie Winner { get; set; }
+
+        public Match(IMatchRules matchRules)
+        {
+            _matchRules = matchRules;
+        }
 
         public void PlayMatch()
         {
-            if (HomeTeam.Nota > AwayTeam.Nota)
-                Winner = HomeTeam;
-            else if(HomeTeam.Nota < AwayTeam.Nota)
-                Winner = AwayTeam;
-            else
-                TieBreak();
+            Winner = _matchRules.GameRule(HomeTeam, AwayTeam);
         }
 
-        private void TieBreak()
-        {
-            Winner = string.CompareOrdinal(HomeTeam.Titulo, AwayTeam.Titulo) < 0 ? HomeTeam : AwayTeam;
-        }
     }
 }

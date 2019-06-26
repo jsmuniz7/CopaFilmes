@@ -2,6 +2,8 @@
 using System.IO;
 using System.Reflection;
 using CopaFilmes.Application.Core;
+using CopaFilmes.Application.Domain;
+using CopaFilmes.Application.Domain.Interfaces;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -55,10 +57,11 @@ namespace CopaFilmes.Api
             app.UseMvc();
         }
 
-        private void AddApplicationServices(IServiceCollection services)
+        private static void AddApplicationServices(IServiceCollection services)
         {
             AddSwagger(services);
             AddMediatr(services);
+            AddRules(services);
         }
 
         private static void AddSwagger(IServiceCollection services)
@@ -97,6 +100,12 @@ namespace CopaFilmes.Api
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailFastRequestBehavior<,>));
 
             services.AddMediatR(assembly);
+        }
+
+        private static void AddRules(IServiceCollection services)
+        {
+            services.AddSingleton<IChampionshipRules, ChampionshipRules>();
+            services.AddSingleton<IMatchRules, MatchRules>();
         }
     }
 }

@@ -1,16 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using CopaFilmes.Application.Domain.Interfaces;
 
 namespace CopaFilmes.Application.Domain
 {
     public class Championship
     {
+        private readonly IChampionshipRules _championshipRules;
+        private readonly IMatchRules _matchRules;
+
         public ChampionshipResult Result { get; set; }
         public List<Match> QuarterFinals { get; set; } = new List<Match>();
         public List<Match> SemiFinals { get; set; } = new List<Match>();
         public Match Finals { get; set; }
+
+        public Championship(
+            IChampionshipRules championshipRules,
+            IMatchRules matchRules)
+        {
+            _championshipRules = championshipRules;
+            _matchRules = matchRules;
+        }
 
         public void StartChampionship(List<Movie> teams)
         {
@@ -19,94 +29,70 @@ namespace CopaFilmes.Application.Domain
 
         private void BuildQuarterFinals(List<Movie> teams)
         {
-            teams = teams.OrderBy(x => x.Titulo).ToList();
-
+            teams = _championshipRules.SortTeamsRule(teams);
             InitializePhase(QuarterFinals, 4);
-
-            foreach (var match in QuarterFinals)
-            {
-                match.HomeTeam = teams.First();
-                match.AwayTeam = teams.Last();
-
-                teams.Remove(teams.First());
-                teams.Remove(teams.Last());
-            }
+            QuarterFinals = _championshipRules.QuarterFinalsRule(teams, QuarterFinals);
         }
 
         private void BuildSemiFinals()
         {
             InitializePhase(SemiFinals, 2);
-            var qualifiedTeams = new List<Movie>();
+            var qualifiedTeams = GetQualifiedTeams(QuarterFinals);
+            SemiFinals = _championshipRules.SemifinalsRule(qualifiedTeams, SemiFinals);
+        }
 
-            foreach (var match in QuarterFinals)
+        private void InitializePhase(ICollection<Match> phase, int numberOfGames)
+        {
+            for (var i = 0; i < numberOfGames; i++)
             {
-                qualifiedTeams.Add(match.Winner);
+                phase.Add(new Match(_matchRules));
             }
+        }
 
-            foreach (var match in SemiFinals)
-            {
-                match.HomeTeam = qualifiedTeams.First();
-                qualifiedTeams.Remove(qualifiedTeams.First());
-
-                match.AwayTeam = qualifiedTeams.First();
-                qualifiedTeams.Remove(qualifiedTeams.First());
-            }
+        private static List<Movie> GetQualifiedTeams(IEnumerable<Match> phase)
+        {
+            return phase.Select(match => match.Winner).ToList();
         }
 
         private void BuildFinals()
         {
-            Finals = new Match();
-            var qualifiedTeams = new List<Movie>();
-
-            foreach (var match in SemiFinals)
-            {
-                qualifiedTeams.Add(match.Winner);
-            }
-
-            Finals.HomeTeam = qualifiedTeams.First();
-            Finals.AwayTeam = qualifiedTeams.Last();
-
+            var qualifiedTeams = GetQualifiedTeams(SemiFinals);
+            Finals = new Match(_matchRules) {HomeTeam = qualifiedTeams.First(), AwayTeam = qualifiedTeams.Last()};
         }
 
         public void PlayQuarterFinals()
         {
-            foreach (var match in QuarterFinals)
-            {
-                match.PlayMatch();
-            }
-
+            PlayMatches(QuarterFinals);
             BuildSemiFinals();
         }
 
         public void PlaySemiFinals()
         {
-            foreach (var match in SemiFinals)
-            {
-                match.PlayMatch();
-            }
-
+            PlayMatches(SemiFinals);
             BuildFinals();
         }
 
         public void PlayFinals()
         {
             Finals.PlayMatch();
+            Result = GetChampionshipResult();
+        }
 
-            Result = new ChampionshipResult
+        private static void PlayMatches(IEnumerable<Match> matches)
+        {
+            foreach (var match in matches)
+            {
+                match.PlayMatch();
+            }
+        }
+
+        private ChampionshipResult GetChampionshipResult()
+        {
+            return new ChampionshipResult
             {
                 FirstPlace = Finals.Winner,
                 SecondPlace = Finals.HomeTeam == Finals.Winner ? Finals.AwayTeam : Finals.HomeTeam
             };
         }
-
-        private static void InitializePhase(ICollection<Match> phase, int numberOfGames)
-        {
-            for (var i = 0; i < numberOfGames; i++)
-            {
-                phase.Add(new Match());
-            }
-        }
-
-
     }
 }
